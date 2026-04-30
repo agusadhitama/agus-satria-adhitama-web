@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Agus Satria Adhitama - Frontend Developer</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  padding: 8rem 2.5rem 5rem;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 4rem;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.hero-grid {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridmove 20s linear infinite;
+}
+@keyframes gridmove {
+  0%   { background-position: 0 0; }
+  100% { background-position: 60px 60px; }
+}
+
+.hero-glow {
+  position: absolute; border-radius: 50%;
+  filter: blur(90px); opacity: 0.10; pointer-events: none;
+}
+.glow-1 { width: 480px; height: 480px; background: var(--lime);   top: -120px; right: 80px;  animation: drift 12s ease-in-out infinite; z-index: 0; }
+.glow-2 { width: 320px; height: 320px; background: var(--purple); bottom: 0;   left: 80px;  animation: drift 16s ease-in-out infinite reverse; z-index: 0; }
+@keyframes drift { 0%,100%{transform:translate(0,0)} 50%{transform:translate(20px,-30px)} }
+
+.hero-left { position: relative; z-index: 1; }
+.hero-right { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 0.85rem; }
+
+/* badge */
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--fm); font-size: 0.68rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--lime);
+  background: rgba(200,255,0,0.07);
+  border: 1px solid rgba(200,255,0,0.18);
+  padding: 0.4rem 1rem; border-radius: 999px;
+  margin-bottom: 1.75rem;
+}
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--lime); border-radius: 50%;
+  animation: blink 1.8s ease-in-out infinite;
+}
+
+/* name */
+.hero-name {
+  font-family: var(--fd);
+  font-size: clamp(3.8rem, 8vw, 7.5rem);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  margin-bottom: 0.65em;
+}
+.hero-name .solid   { color: var(--ink); display: block; }
+.hero-name .outline { color: transparent; -webkit-text-stroke: 2px var(--lime); display: block; }
+
+.hero-sub {
+  font-size: 1.05rem; font-weight: 300;
+  color: var(--ink2); max-width: 440px;
+  margin-bottom: 2.5rem; line-height: 1.85;
+}
+.hero-sub strong { color: var(--ink); font-weight: 500; }
+
+.hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+.hero-scroll {
+  margin-top: 3.5rem;
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--fm); font-size: 0.65rem;
+  color: var(--ink3); letter-spacing: 0.12em; text-transform: uppercase;
+}
+.scroll-line { width: 36px; height: 1px; background: linear-gradient(to right, var(--lime), transparent); }
+
+/* ── PROFILE CARD ── */
+.profile-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 18px; overflow: hidden;
+  position: relative;
+  aspect-ratio: 3/4;
+  transition: border-color .3s;
+}
+.profile-card:hover { border-color: rgba(200,255,0,0.3); }
+.profile-card img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  display: block;
+  filter: grayscale(10%) contrast(1.05);
+  transition: filter .4s, transform .5s;
+}
+.profile-card:hover img { filter: grayscale(0) contrast(1.1); transform: scale(1.04); }
+.profile-card-overlay {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, rgba(7,7,10,0.82) 0%, rgba(7,7,10,0.05) 55%, transparent 100%);
+}
+.profile-card-tag {
+  position: absolute; top: 1rem; right: 1rem;
+  background: var(--lime); color: var(--bg);
+  font-family: var(--fd); font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.3rem 0.7rem; border-radius: 999px;
+}
+.profile-card-info {
+  position: absolute; bottom: 0; left: 0; right: 0; padding: 1.25rem;
+}
+.pci-name { font-family: var(--fd); font-size: 1.3rem; font-weight: 800; letter-spacing: -0.02em; }
+.pci-role { font-family: var(--fm); font-size: 0.65rem; color: var(--lime); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 2px; }
+
+/* stat pills */
+.stat-pills { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; }
+.stat-pill {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 12px; padding: 0.9rem 1.1rem;
+  text-decoration: none; color: inherit;
+  transition: border-color .2s, transform .2s, background .2s;
+  display: flex; flex-direction: column; gap: 3px;
+}
+.stat-pill:hover { border-color: var(--lime); transform: translateY(-3px); background: rgba(200,255,0,0.03); }
+.sp-num { font-family: var(--fd); font-size: 1.7rem; font-weight: 800; letter-spacing: -0.03em; color: var(--lime); line-height: 1; }
+.sp-label { font-family: var(--fm); font-size: 0.62rem; color: var(--ink3); letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* ── HOME NAV GRID ── */
+.home-nav {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+}
+.hn-item {
+  padding: 2.5rem 2rem;
+  border-right: 1px solid var(--border);
+  text-decoration: none; color: inherit;
+  display: flex; flex-direction: column; gap: 0.85rem;
+  transition: background .25s; position: relative; overflow: hidden;
+}
+.hn-item:last-child { border-right: none; }
+.hn-item:hover { background: var(--bg2); }
+.hn-item::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: var(--lime);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .35s var(--ease);
+}
+.hn-item:hover::after { transform: scaleX(1); }
+.hn-num { font-family: var(--fm); font-size: 0.62rem; color: var(--lime); letter-spacing: 0.15em; }
+.hn-title { font-family: var(--fd); font-size: 1.45rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; transition: color .2s; }
+.hn-item:hover .hn-title { color: var(--lime); }
+.hn-desc { font-size: 0.83rem; color: var(--ink3); line-height: 1.6; }
+.hn-arrow { margin-top: auto; align-self: flex-start; font-size: 1.1rem; color: var(--ink3); transition: transform .25s var(--ease), color .2s; }
+.hn-item:hover .hn-arrow { transform: translate(4px,-4px); color: var(--lime); }
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 4rem; }
+  .hero-right { max-width: 320px; }
+  .home-nav { grid-template-columns: 1fr 1fr; }
+  .hn-item { border-bottom: 1px solid var(--border); }
+}
+@media (max-width: 520px) {
+  .home-nav { grid-template-columns: 1fr; }
+  .hero-name { font-size: clamp(3rem, 12vw, 5rem); }
+}
+
+/* ── TYPOGRAPHY FIX ── */
+.hero-name  { font-size: clamp(2.8rem, 7vw, 5.5rem) !important; line-height: 0.92 !important; }
+.hero-sub   { font-size: 0.95rem !important; line-height: 1.8 !important; }
+.hn-title   { font-size: 1.05rem !important; line-height: 1.2 !important; }
+.hn-desc    { font-size: 0.82rem !important; }
+.sp-num     { font-size: 1.5rem  !important; }
+.sp-label   { font-size: 0.6rem  !important; }
+.hero-badge { font-size: 0.65rem !important; }
+.pci-name   { font-size: 1rem    !important; }
+.pci-role   { font-size: 0.6rem  !important; }
+
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="loader-txt">Agus Satria Adhitama</div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-dot"></div>
+    ADHIT
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero" id="top">
+  <div class="hero-grid"></div>
+  <div class="hero-glow glow-1"></div>
+  <div class="hero-glow glow-2"></div>
+
+  <div class="hero-left">
+    <div class="hero-badge">Frontend Developer · Malang, ID</div>
+
+    <h1 class="hero-name">
+      <span class="solid">AGUS</span>
+      <span class="solid">SATRIA</span>
+      <span class="outline">ADHITAMA</span>
+    </h1>
+
+    <p class="hero-sub">
+      Saya membangun <strong>ruang digital</strong> tempat fungsi dan perasaan bertemu. Bukan sekadar bekerja, tapi membuat orang ingin kembali.
+    </p>
+
+    <div class="hero-actions">
+      <a href="projects.html" class="btn btn-lime">Lihat Projects ↗</a>
+      <a href="about.html"    class="btn btn-outline">Tentang Saya</a>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      scroll to explore
+    </div>
+  </div>
+
+  <div class="hero-right rv">
+    <div class="profile-card" data-tilt>
+      <!--
+        FOTO: ubah "photo.jpeg" sesuai nama file foto kamu.
+        Letakkan file foto di folder yang SAMA dengan index.html.
+      -->
+      <img src="photo.jpeg" alt="Agus Satria Adhitama"/>
+      <div class="profile-card-overlay"></div>
+      <div class="profile-card-tag">Open to Work</div>
+      <div class="profile-card-info">
+        <div class="pci-name">Agus Satria Adhitama</div>
+        <div class="pci-role">Frontend Developer</div>
+      </div>
+    </div>
+
+    <div class="stat-pills">
+      <a href="about.html"    class="stat-pill"><span class="sp-num">4+</span><span class="sp-label">Tahun Exp.</span></a>
+      <a href="projects.html" class="stat-pill"><span class="sp-num">60+</span><span class="sp-label">Projects</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ MARQUEE ═══════════════ -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="mq-item">Agus Satria Adhitama</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Frontend Developer</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">UI Engineering</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">CSS Artisan</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Malang ID</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Open to Collab</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Agus Satria Adhitama</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Frontend Developer</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">UI Engineering</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">CSS Artisan</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Malang ID</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Open to Collab</span><span class="mq-item mq-sep"> ✦ </span>
+  </div>
+</div>
+
+<!-- ═══════════════ HOME NAV ═══════════════ -->
+<nav class="home-nav">
+  <a href="about.html" class="hn-item rv">
+    <span class="hn-num">01</span>
+    <h3 class="hn-title">About<br>Me</h3>
+    <p class="hn-desc">Siapa saya &amp; kenapa saya peduli dengan detail.</p>
+    <span class="hn-arrow">↗</span>
+  </a>
+  <a href="projects.html" class="hn-item rv d1">
+    <span class="hn-num">02</span>
+    <h3 class="hn-title">Selected<br>Work</h3>
+    <p class="hn-desc">Project yang pernah saya bangun dari nol.</p>
+    <span class="hn-arrow">↗</span>
+  </a>
+  <a href="blog.html" class="hn-item rv d2">
+    <span class="hn-num">03</span>
+    <h3 class="hn-title">Blog &amp;<br>Notes</h3>
+    <p class="hn-desc">Catatan teknikal &amp; refleksi dari perjalanan coding.</p>
+    <span class="hn-arrow">↗</span>
+  </a>
+  <a href="contact.html" class="hn-item rv d3">
+    <span class="hn-num">04</span>
+    <h3 class="hn-title">Let's<br>Talk</h3>
+    <p class="hn-desc">Punya proyek? Saya selalu terbuka untuk kolaborasi.</p>
+    <span class="hn-arrow">↗</span>
+  </a>
+</nav>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="footer-copy">© 2026 <strong>Agus Satria Adhitama</strong> · All rights reserved</div>
+  <div class="footer-brand">ADHIT<span>.</span>DEV</div>
+  <div class="footer-copy">Designed &amp; Built by <strong>Agus Satria Adhitama</strong></div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+  // Pastikan halaman selalu mulai dari atas
+  window.scrollTo(0, 0);
+</script>
+</body>
+</html>

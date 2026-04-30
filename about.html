@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>About - Agus Satria Adhitama</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+/* ── ABOUT SPLIT ── */
+.about-split {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 5rem;
+  align-items: start;
+  margin-top: 4rem;
+}
+
+/* PHOTO */
+.photo-col { position: relative; }
+.photo-frame {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  aspect-ratio: 3/4;
+}
+/* ── THE PHOTO ── */
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: grayscale(10%) contrast(1.05);
+  transition: filter .4s, transform .5s var(--ease);
+}
+.photo-frame:hover img {
+  filter: grayscale(0) contrast(1.1);
+  transform: scale(1.04);
+}
+.photo-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(7,7,10,0.75) 0%, transparent 55%);
+  pointer-events: none;
+}
+.photo-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 1.5rem;
+}
+.photo-name {
+  font-family: var(--fd);
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+.photo-role {
+  font-family: var(--fm);
+  font-size: 0.68rem;
+  color: var(--lime);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+
+/* badge */
+.photo-badge {
+  position: absolute;
+  top: -1rem; right: -1rem;
+  width: 80px; height: 80px;
+  background: var(--lime);
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  font-family: var(--fd);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bg);
+  text-align: center;
+  line-height: 1.3;
+  transform: rotate(12deg);
+  transition: transform .3s var(--ease);
+  text-decoration: none;
+  border: 3px solid var(--bg);
+}
+.photo-badge:hover { transform: rotate(0) scale(1.1); }
+
+/* ABOUT TEXT */
+.about-body p {
+  color: var(--ink2);
+  font-size: 1.05rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.85;
+}
+.about-body p strong { color: var(--ink); font-weight: 500; }
+
+/* SKILL GRID */
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+  margin-top: 2.5rem;
+}
+.skill-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.9rem 1.1rem;
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; color: inherit;
+  transition: border-color .2s, background .2s, transform .2s;
+}
+.skill-card:hover {
+  border-color: var(--lime);
+  background: rgba(200,255,0,0.04);
+  transform: translateX(4px);
+}
+.skill-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--lime);
+  flex-shrink: 0;
+}
+.skill-name {
+  font-family: var(--fm);
+  font-size: 0.78rem;
+  color: var(--ink2);
+  letter-spacing: 0.04em;
+}
+
+/* ── EXPERIENCE ── */
+#exp { background: var(--bg2); }
+.exp-rows { margin-top: 3rem; }
+.exp-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 2rem;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  text-decoration: none; color: inherit;
+  transition: padding-left .3s var(--ease);
+}
+.exp-row:first-child { border-top: 1px solid var(--border); }
+.exp-row::before {
+  content: '';
+  position: absolute; left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 0; height: 2px;
+  background: var(--lime);
+  transition: width .3s var(--ease);
+}
+.exp-row:hover { padding-left: 1.25rem; }
+.exp-row:hover::before { width: 0.75rem; }
+.exp-year {
+  font-family: var(--fm);
+  font-size: 0.72rem;
+  color: var(--ink3);
+  letter-spacing: 0.06em;
+  padding-top: 5px;
+}
+.exp-co {
+  font-family: var(--fd);
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.2rem;
+  transition: color .2s;
+}
+.exp-row:hover .exp-co { color: var(--lime); }
+.exp-role {
+  font-family: var(--fm);
+  font-size: 0.7rem;
+  color: var(--lime);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.exp-desc { color: var(--ink3); font-size: 0.88rem; }
+
+/* ── NUMBERS ── */
+#nums { background: var(--bg); }
+.nums-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 3rem;
+}
+.num-card {
+  background: var(--bg2);
+  padding: 2.5rem;
+  transition: background .2s;
+}
+.num-card:hover { background: var(--bg3); }
+.num-val {
+  font-family: var(--fd);
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--lime);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.num-label {
+  font-family: var(--fm);
+  font-size: 0.72rem;
+  color: var(--ink2);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.num-desc { font-size: 0.85rem; color: var(--ink3); margin-top: 0.5rem; }
+
+@media (max-width: 900px) {
+  .about-split { grid-template-columns: 1fr; gap: 3rem; }
+  .photo-col { max-width: 360px; }
+  .exp-row { grid-template-columns: 1fr; gap: 0.5rem; }
+  .nums-grid { grid-template-columns: 1fr; }
+}
+
+/* ── GLOBAL TYPOGRAPHY FIX ── */
+.num-val    { font-size: 2.8rem !important; }
+.num-label  { font-size: 0.72rem !important; }
+.exp-co     { font-size: 1.25rem !important; letter-spacing: -0.01em !important; }
+.proj-title { font-size: 1.3rem  !important; letter-spacing: -0.01em !important; }
+.proj-n     { font-size: 1.8rem  !important; }
+.pf-title   { font-size: 1.5rem  !important; letter-spacing: -0.01em !important; }
+.photo-name { font-size: 1.15rem !important; }
+.avail-title{ font-size: 1.1rem  !important; }
+.nl-left h3 { font-size: 1.4rem  !important; letter-spacing: -0.01em !important; }
+.form-title { font-size: 1.35rem !important; letter-spacing: -0.01em !important; }
+.post-title { font-size: 1rem    !important; line-height: 1.4 !important; }
+.post-hero .post-title { font-size: 1.4rem !important; }
+.feat-badge, .featured-badge { font-size: 0.65rem !important; }
+.email-link { font-size: clamp(1.6rem, 4vw, 2.8rem) !important; letter-spacing: -0.02em !important; }
+.hn-title   { font-size: 1.1rem  !important; }
+.hsc-title  { font-size: 1.5rem  !important; }
+.pci-name   { font-size: 1.1rem  !important; }
+.pci-role   { font-size: 0.62rem !important; }
+.about-card-name { font-size: 1.1rem !important; }
+
+/* body text readable */
+.about-body p, .exp-desc, .proj-desc, .pf-desc, .post-excerpt,
+.blog-excerpt, .avail-desc, .contact-desc, .nl-left p,
+.num-desc, .fact-desc { 
+  font-size: 0.92rem !important; 
+  line-height: 1.8 !important;
+  color: var(--ink2);
+}
+
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="loader-txt">About</div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-dot"></div>ADHIT
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Hire Me</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-ghost">ABOUT</div>
+  <div class="page-eyebrow">001 - About Me</div>
+  <h1 class="page-title">THE PERSON<br>BEHIND<br>THE CODE</h1>
+</div>
+
+<section>
+  <div class="about-split">
+
+    <!-- ── PHOTO COLUMN ── -->
+    <div class="photo-col rv">
+      <div class="photo-frame" data-tilt>
+        <!--
+          ══════════════════════════════════════════
+          CARA PASANG FOTO:
+          1. Taruh file foto di folder yang SAMA dengan about.html
+          2. Ubah "photo.jpeg" di bawah menjadi nama file foto kamu
+             Contoh: src="agus.jpg" atau src="profil.png"
+          ══════════════════════════════════════════
+        -->
+        <img
+          src="photo.jpeg"
+          alt="Agus Satria Adhitama"
+        />
+        <div class="photo-overlay"></div>
+        <div class="photo-caption">
+          <div class="photo-name">Agus Satria Adhitama</div>
+          <div class="photo-role">Frontend Developer · Malang, ID</div>
+        </div>
+      </div>
+      <a href="contact.html" class="photo-badge">Open<br>to<br>Work</a>
+    </div>
+
+    <!-- ── TEXT COLUMN ── -->
+    <div class="about-body">
+      <div class="sec-tag rv">Profile</div>
+      <h2 class="sec-h rv d1" style="margin-bottom:2rem">HALO,<br>SAYA ADHIT</h2>
+
+      <p class="rv d1">Saya <strong>Agus Satria Adhitama</strong> seorang arsitek layar yang membangun ruang-ruang digital. Bukan sekadar ruang yang bisa dimasuki, tapi ruang yang membuat orang ingin tinggal lebih lama.</p>
+      <p class="rv d2">Kode bagi saya bukan instruksi untuk mesin melainkan partitur. Setiap baris adalah not yang, kalau disusun dengan tepat, menghasilkan sesuatu yang jauh melampaui fungsinya : sebuah <em>pengalaman</em>.</p>
+      <p class="rv d3">Saya percaya keindahan bukan ornamen. Ia adalah presisi yang terasa. Ketika spasi antar huruf terasa pas, ketika animasi selesai tepat waktu, ketika warna berbicara sebelum kata-kata di sanalah saya bekerja.</p>
+      <p class="rv d4">Di luar layar, saya adalah pemburu pola mendekonstruksi hal-hal yang terlihat ajaib sampai ketemu mekanisme kecilnya yang elegan. Karena di balik setiap hal yang terasa natural, selalu ada yang merancangnya dengan sangat sengaja.</p>
+
+      <div class="skill-grid rv">
+        <a href="projects.html" class="skill-card"><div class="skill-dot"></div><span class="skill-name">HTML / CSS</span></a>
+        <a href="projects.html" class="skill-card"><div class="skill-dot"></div><span class="skill-name">JavaScript</span></a>
+        <a href="projects.html" class="skill-card"><div class="skill-dot"></div><span class="skill-name">React</span></a>
+        <a href="projects.html" class="skill-card"><div class="skill-dot"></div><span class="skill-name">TypeScript</span></a>
+        <a href="projects.html" class="skill-card"><div class="skill-dot"></div><span class="skill-name">Next.js</span></a>
+        <a href="projects.html" class="skill-card"><div class="skill-dot"></div><span class="skill-name">Node.js</span></a>
+        <a href="projects.html" class="skill-card"><div class="skill-dot"></div><span class="skill-name">Figma</span></a>
+        <a href="projects.html" class="skill-card"><div class="skill-dot"></div><span class="skill-name">Git / GitHub</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="exp">
+  <div class="sec-tag rv">Experience</div>
+  <h2 class="sec-h rv d1">WHERE I'VE<br>WORKED</h2>
+  <div class="exp-rows">
+    <a href="#" class="exp-row rv">
+      <span class="exp-year">Jan 2026 - Mai 2026</span>
+      <div>
+        <div class="exp-co">NEW STAR CINEPLEX</div>
+        <div class="exp-role">IT Support / Computer Technician</div>
+        <p class="exp-desc">Saya bertanggung jawab mengelola dan memelihara infrastruktur IT untuk 38 cabang bioskop dengan fokus pada stabilitas sistem dan minimnya downtime operasional. Pekerjaan mencakup remote troubleshooting hardware dan software,
+          instalasi serta konfigurasi perangkat IT dan jaringan LAN di lingkungan multi cabang. Selain itu, saya memantau sistem perpajakan berbasis cloud dan integrasi API untuk menjaga akurasi data,
+          serta mengelola pembaruan jadwal film melalui database terpusat agar operasional tetap tersinkronisasi.
+          Saya juga melakukan rekap dan validasi data fingerprint kehadiran karyawan sebagai bagian dari administrasi kepegawaian.</p>
+      </div>
+    </a>
+    <a href="#" class="exp-row rv d1">
+      <span class="exp-year">Jan 2023 - Mar 2023</span>
+      <div>
+        <div class="exp-co">Dinas Komunikasi dan Informatika Kabupaten Malang</div>
+        <div class="exp-role">Web Developer Intern</div>
+        <p class="exp-desc">Saya mengembangkan dan mengimplementasikan tiga fitur utama pada website SIMODAS, yaitu sistem peminjaman, inventaris ruang, dan materi ruang, guna meningkatkan efisiensi monitoring aset di Diskominfo Kabupaten Malang.
+          Dalam prosesnya, saya merancang struktur database, wireframe UI, serta fitur cetak PDF untuk mendukung rekapitulasi dan pelaporan aset secara digital. Saya juga berkoordinasi secara rutin dengan pembimbing lapangan untuk evaluasi sistem dan penyesuaian kebutuhan teknis,
+          serta menyusun dokumentasi proyek secara lengkap mulai dari tahap perancangan hingga laporan akhir.</p>
+      </div>
+    </a>
+    <a href="#" class="exp-row rv d2">
+      <span class="exp-year">Jul 2017 - Jan 2018</span>
+      <div>
+        <div class="exp-co">Tiara Electronics</div>
+        <div class="exp-role">Produksi dan Instalasi Audio</div>
+        <p class="exp-desc">Saya merakit komponen elektronik dan sistem audio dari tahap awal hingga menjadi produk jadi sesuai standar kualitas yang ditetapkan. Selain itu, saya juga melaksanakan instalasi sistem audio di berbagai fasilitas klien, termasuk penataan perangkat dan konfigurasi untuk memastikan performa suara yang optimal.</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section id="nums">
+  <div class="sec-tag rv">By the Numbers</div>
+  <h2 class="sec-h rv d1">DALAM<br>ANGKA</h2>
+  <div class="nums-grid rv">
+    <div class="num-card">
+      <div class="num-val">4+</div>
+      <div class="num-label">Tahun Experience</div>
+      <p class="num-desc">Nulis kode sejak masih bingung bedain margin dan padding.</p>
+    </div>
+    <div class="num-card">
+      <div class="num-val">20+</div>
+      <div class="num-label">Projects Shipped</div>
+      <p class="num-desc">Dari landing page sederhana sampai web app yang kompleks.</p>
+    </div>
+    <div class="num-card">
+      <div class="num-val">∞</div>
+      <div class="num-label">Kopi Diminum</div>
+      <p class="num-desc">Bahan bakar utama setiap sesi debugging tengah malam.</p>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="mq-item">Agus Satria Adhitama</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Frontend Developer</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Based in Malang</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Open to Work</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Agus Satria Adhitama</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Frontend Developer</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Based in Malang</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Open to Work</span><span class="mq-item mq-sep"> ✦ </span>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-copy">© 2026 <strong>Agus Satria Adhitama</strong> · All rights reserved</div>
+  <div class="footer-brand">ADHIT<span>.</span>DEV</div>
+  <div class="footer-copy">Designed &amp; Built by <strong>Agus Satria Adhitama</strong></div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

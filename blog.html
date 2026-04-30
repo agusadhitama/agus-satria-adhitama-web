@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Blog - Agus Satria Adhitama</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+/* ── FILTER ── */
+.filter-row {
+  display: flex; gap: 0.5rem; flex-wrap: wrap;
+  margin-top: 3rem; margin-bottom: 2.5rem;
+}
+.fbtn {
+  font-family: var(--fm); font-size: 0.7rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.45rem 1rem; border-radius: 999px;
+  border: 1px solid var(--border2);
+  background: transparent; color: var(--ink3);
+  cursor: pointer; transition: all .2s;
+}
+.fbtn:hover, .fbtn.on { background: var(--lime); color: var(--bg); border-color: var(--lime); }
+
+/* ── FEATURED POST ── */
+.post-hero {
+  display: grid; grid-template-columns: 1.4fr 1fr;
+  border: 1px solid var(--border); border-radius: 20px;
+  overflow: hidden; margin-bottom: 1px;
+  text-decoration: none; color: inherit;
+  transition: border-color .3s;
+  background: var(--bg2);
+}
+.post-hero:hover { border-color: var(--lime); }
+.ph-body { padding: 3rem; display: flex; flex-direction: column; gap: 1.1rem; transition: background .2s; }
+.post-hero:hover .ph-body { background: var(--bg3); }
+.ph-side {
+  background: var(--bg3);
+  display: flex; align-items: center; justify-content: center;
+  border-left: 1px solid var(--border);
+  font-size: 6rem;
+  transition: border-color .3s;
+}
+.post-hero:hover .ph-side { border-color: var(--lime); }
+
+.feat-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--fm); font-size: 0.65rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  background: rgba(200,255,0,0.1); color: var(--lime);
+  padding: 4px 10px; border-radius: 999px;
+  border: 1px solid rgba(200,255,0,0.2);
+  align-self: flex-start;
+}
+.feat-badge::before { content: '★'; font-size: 0.6rem; }
+
+/* ── CAT PILL ── */
+.cat-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--fm); font-size: 0.68rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  align-self: flex-start;
+}
+.cat-dot { width: 6px; height: 6px; border-radius: 50%; }
+.c-css  { color: #ff5050; } .c-css  .cat-dot { background: #ff5050; }
+.c-js   { color: var(--lime); } .c-js .cat-dot { background: var(--lime); }
+.c-web  { color: #44aaff; } .c-web  .cat-dot { background: #44aaff; }
+.c-perf { color: var(--orange); } .c-perf .cat-dot { background: var(--orange); }
+.c-ux   { color: var(--purple); } .c-ux   .cat-dot { background: var(--purple); }
+
+.post-title {
+  font-family: var(--fd);
+  font-weight: 800; letter-spacing: -0.03em; line-height: 1.05;
+  transition: color .2s;
+}
+.post-hero .post-title { font-size: 2rem; }
+.post-card .post-title { font-size: 1.2rem; }
+.post-hero:hover .post-title,
+.post-card:hover .post-title { color: var(--lime); }
+
+.post-excerpt { color: var(--ink3); font-size: 0.88rem; line-height: 1.7; flex: 1; }
+.post-meta {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 1rem; border-top: 1px solid var(--border); margin-top: auto;
+}
+.post-info { font-family: var(--fm); font-size: 0.68rem; color: var(--ink3); letter-spacing: 0.06em; }
+.post-arr {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink3); font-size: 0.85rem;
+  transition: all .25s;
+}
+.post-hero:hover .post-arr,
+.post-card:hover .post-arr { background: var(--lime); border-color: var(--lime); color: var(--bg); transform: rotate(45deg); }
+
+/* ── POST GRID ── */
+.post-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 20px 20px; overflow: hidden;
+}
+.post-card {
+  background: var(--bg2); padding: 2rem;
+  display: flex; flex-direction: column; gap: 0.9rem;
+  text-decoration: none; color: inherit;
+  transition: background .2s;
+}
+.post-card:hover { background: var(--bg3); }
+
+/* ── NEWSLETTER ── */
+#nl { background: var(--bg2); }
+.nl-box {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 3rem; flex-wrap: wrap;
+  margin-top: 3rem;
+  transition: border-color .3s;
+}
+.nl-box:hover { border-color: rgba(200,255,0,0.15); }
+.nl-left h3 {
+  font-family: var(--fd);
+  font-size: 2rem; font-weight: 800;
+  letter-spacing: -0.03em; margin-bottom: 0.5rem;
+}
+.nl-left p { color: var(--ink3); font-size: 0.9rem; max-width: 360px; }
+.nl-form { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.nl-input {
+  font-family: var(--fm); font-size: 0.8rem;
+  background: var(--bg); border: 1px solid var(--border2);
+  color: var(--ink); padding: 0.8rem 1.2rem;
+  border-radius: 999px; outline: none;
+  transition: border-color .2s; min-width: 240px;
+}
+.nl-input:focus { border-color: var(--lime); }
+.nl-input::placeholder { color: var(--ink3); }
+.nl-btn {
+  font-family: var(--fm); font-size: 0.75rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--lime); color: var(--bg);
+  border: none; padding: 0.8rem 1.5rem;
+  border-radius: 999px; cursor: pointer; font-weight: 700;
+  transition: transform .2s, box-shadow .2s;
+}
+.nl-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,255,0,0.25); }
+
+@media (max-width: 900px) {
+  .post-hero { grid-template-columns: 1fr; }
+  .ph-side { display: none; }
+  .post-grid { grid-template-columns: 1fr; }
+  .nl-box { flex-direction: column; gap: 2rem; }
+  .nl-input { min-width: 100%; }
+}
+
+/* ── GLOBAL TYPOGRAPHY FIX ── */
+.num-val    { font-size: 2.8rem !important; }
+.num-label  { font-size: 0.72rem !important; }
+.exp-co     { font-size: 1.25rem !important; letter-spacing: -0.01em !important; }
+.proj-title { font-size: 1.3rem  !important; letter-spacing: -0.01em !important; }
+.proj-n     { font-size: 1.8rem  !important; }
+.pf-title   { font-size: 1.5rem  !important; letter-spacing: -0.01em !important; }
+.photo-name { font-size: 1.15rem !important; }
+.avail-title{ font-size: 1.1rem  !important; }
+.nl-left h3 { font-size: 1.4rem  !important; letter-spacing: -0.01em !important; }
+.form-title { font-size: 1.35rem !important; letter-spacing: -0.01em !important; }
+.post-title { font-size: 1rem    !important; line-height: 1.4 !important; }
+.post-hero .post-title { font-size: 1.4rem !important; }
+.feat-badge, .featured-badge { font-size: 0.65rem !important; }
+.email-link { font-size: clamp(1.6rem, 4vw, 2.8rem) !important; letter-spacing: -0.02em !important; }
+.hn-title   { font-size: 1.1rem  !important; }
+.hsc-title  { font-size: 1.5rem  !important; }
+.pci-name   { font-size: 1.1rem  !important; }
+.pci-role   { font-size: 0.62rem !important; }
+.about-card-name { font-size: 1.1rem !important; }
+
+/* body text readable */
+.about-body p, .exp-desc, .proj-desc, .pf-desc, .post-excerpt,
+.blog-excerpt, .avail-desc, .contact-desc, .nl-left p,
+.num-desc, .fact-desc { 
+  font-size: 0.92rem !important; 
+  line-height: 1.8 !important;
+  color: var(--ink2);
+}
+
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="loader-txt">Blog</div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<nav>
+  <a href="index.html" class="nav-logo"><div class="nav-logo-dot"></div>ADHIT</a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Hire Me</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-ghost">BLOG</div>
+  <div class="page-eyebrow">003 - Blog</div>
+  <h1 class="page-title">THOUGHTS<br>&amp; WRITINGS</h1>
+</div>
+
+<section>
+  <div class="sec-tag rv">Latest Posts</div>
+  <h2 class="sec-h rv d1">CATATAN DARI<br>PERJALANAN CODING</h2>
+
+  <div class="filter-row rv d2">
+    <button class="fbtn on" onclick="filterB('all',this)">All</button>
+    <button class="fbtn" onclick="filterB('css',this)">CSS</button>
+    <button class="fbtn" onclick="filterB('js',this)">JavaScript</button>
+    <button class="fbtn" onclick="filterB('web',this)">Web API</button>
+    <button class="fbtn" onclick="filterB('perf',this)">Performance</button>
+    <button class="fbtn" onclick="filterB('ux',this)">UX</button>
+  </div>
+
+  <!-- FEATURED -->
+  <a href="#" class="post-hero rv" data-cat="css" id="featPost">
+    <div class="ph-body">
+      <div class="feat-badge">Featured Post</div>
+      <div class="cat-pill c-css"><div class="cat-dot"></div>CSS</div>
+      <h3 class="post-title">CSS Container Queries: Saatnya Move On dari Viewport</h3>
+      <p class="post-excerpt">Container queries secara fundamental mengubah cara berpikir soal responsivitas. Komponen kini responsif terhadap containernya sendiri, bukan layar. Ini perubahan paradigma, bukan sekadar fitur baru.</p>
+      <div class="post-meta">
+        <span class="post-info">12 Apr 2025 · 6 min read</span>
+        <div class="post-arr">→</div>
+      </div>
+    </div>
+    <div class="ph-side">📦</div>
+  </a>
+
+  <!-- GRID -->
+  <div class="post-grid rv" id="postGrid">
+    <a href="#" class="post-card" data-cat="js">
+      <div class="cat-pill c-js"><div class="cat-dot"></div>JavaScript</div>
+      <h3 class="post-title">Kenapa Saya Mulai Nulis Kode yang "Lebih Lambat"</h3>
+      <p class="post-excerpt">Refleksi setelah 2 tahun terobsesi performa readable code jauh lebih berharga.</p>
+      <div class="post-meta">
+        <span class="post-info">28 Mar 2025 · 8 min</span>
+        <div class="post-arr">→</div>
+      </div>
+    </a>
+    <a href="#" class="post-card" data-cat="web">
+      <div class="cat-pill c-web"><div class="cat-dot"></div>Web API</div>
+      <h3 class="post-title">View Transitions API: Animasi Halaman Native</h3>
+      <p class="post-excerpt">Browser punya API native untuk transisi halaman smooth. Implementasi di proyek nyata.</p>
+      <div class="post-meta">
+        <span class="post-info">05 Mar 2025 · 5 min</span>
+        <div class="post-arr">→</div>
+      </div>
+    </a>
+    <a href="#" class="post-card" data-cat="perf">
+      <div class="cat-pill c-perf"><div class="cat-dot"></div>Performance</div>
+      <h3 class="post-title">Debug Core Web Vitals yang Tiba-tiba Jeblok</h3>
+      <p class="post-excerpt">CLS skor turun ke 0.45 overnight. Kronologi debugging step by step.</p>
+      <div class="post-meta">
+        <span class="post-info">18 Feb 2025 · 7 min</span>
+        <div class="post-arr">→</div>
+      </div>
+    </a>
+    <a href="#" class="post-card" data-cat="ux">
+      <div class="cat-pill c-ux"><div class="cat-dot"></div>UX / Design</div>
+      <h3 class="post-title">Micro-interactions yang Bikin User Tersenyum</h3>
+      <p class="post-excerpt">Animasi kecil yang berdampak besar terhadap feel keseluruhan sebuah app.</p>
+      <div class="post-meta">
+        <span class="post-info">02 Feb 2025 · 4 min</span>
+        <div class="post-arr">→</div>
+      </div>
+    </a>
+    <a href="#" class="post-card" data-cat="css">
+      <div class="cat-pill c-css"><div class="cat-dot"></div>CSS</div>
+      <h3 class="post-title">Grid vs Flexbox: Panduan Praktis</h3>
+      <p class="post-excerpt">Panduan berdasarkan kasus nyata setelah ratusan jam nulis layout CSS.</p>
+      <div class="post-meta">
+        <span class="post-info">15 Jan 2025 · 6 min</span>
+        <div class="post-arr">→</div>
+      </div>
+    </a>
+    <a href="#" class="post-card" data-cat="js">
+      <div class="cat-pill c-js"><div class="cat-dot"></div>JavaScript</div>
+      <h3 class="post-title">Async/Await Patterns yang Sering Saya Pakai</h3>
+      <p class="post-excerpt">Pola async yang efektif di berbagai proyek production.</p>
+      <div class="post-meta">
+        <span class="post-info">08 Jan 2025 · 5 min</span>
+        <div class="post-arr">→</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section id="nl">
+  <div class="sec-tag rv">Stay Updated</div>
+  <h2 class="sec-h rv d1">SUBSCRIBE<br>NEWSLETTER</h2>
+  <div class="nl-box rv d2">
+    <div class="nl-left">
+      <h3>Dapat notifikasi artikel baru</h3>
+      <p>Satu email per minggu. Tidak ada spam. Unsubscribe kapan saja.</p>
+    </div>
+    <div class="nl-form">
+      <input type="email" class="nl-input" placeholder="email@kamu.com" id="nlEmail"/>
+      <button class="nl-btn" onclick="subscribeNl()">Subscribe →</button>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="mq-item">CSS Tips</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">JS Patterns</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Web Performance</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">UX Insights</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">by Agus Satria Adhitama</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">CSS Tips</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">JS Patterns</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Web Performance</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">UX Insights</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">by Agus Satria Adhitama</span><span class="mq-item mq-sep"> ✦ </span>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-copy">© 2026 <strong>Agus Satria Adhitama</strong> · All rights reserved</div>
+  <div class="footer-brand">ADHIT<span>.</span>DEV</div>
+  <div class="footer-copy">Designed &amp; Built by <strong>Agus Satria Adhitama</strong></div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+function filterB(cat, btn) {
+  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  const feat = document.getElementById('featPost');
+  if (feat) feat.style.display = (cat === 'all' || feat.dataset.cat === cat) ? '' : 'none';
+  document.querySelectorAll('.post-card').forEach(el => {
+    el.style.display = (cat === 'all' || el.dataset.cat === cat) ? '' : 'none';
+  });
+}
+function subscribeNl() {
+  const v = document.getElementById('nlEmail').value.trim();
+  if (!v || !v.includes('@')) { alert('Masukkan email yang valid!'); return; }
+  alert('Terima kasih! ' + v + ' berhasil didaftarkan.');
+  document.getElementById('nlEmail').value = '';
+}
+</script>
+</body>
+</html>

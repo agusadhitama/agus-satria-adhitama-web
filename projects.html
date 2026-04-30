@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Projects - Agus Satria Adhitama</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+/* ── FILTER ── */
+.filter-row {
+  display: flex; gap: 0.5rem; flex-wrap: wrap;
+  margin-top: 3rem; margin-bottom: 2.5rem;
+}
+.fbtn {
+  font-family: var(--fm);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--border2);
+  background: transparent;
+  color: var(--ink3);
+  cursor: pointer;
+  transition: all .2s;
+}
+.fbtn:hover, .fbtn.on {
+  background: var(--lime);
+  color: var(--bg);
+  border-color: var(--lime);
+}
+
+/* ── PROJECT LIST ── */
+.proj-list { display: flex; flex-direction: column; }
+.proj-item {
+  display: grid;
+  grid-template-columns: 72px 1fr 56px;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none; color: inherit;
+  position: relative;
+  transition: padding-left .3s var(--ease);
+}
+.proj-item:first-child { border-top: 1px solid var(--border); }
+.proj-item::before {
+  content: '';
+  position: absolute; left: 0; top: 50%;
+  transform: translateY(-50%);
+  height: 2px; width: 0;
+  background: var(--lime);
+  transition: width .3s var(--ease);
+}
+.proj-item:hover { padding-left: 1.25rem; }
+.proj-item:hover::before { width: 0.75rem; }
+
+.proj-n {
+  font-family: var(--fd);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--border2);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  transition: color .3s;
+}
+.proj-item:hover .proj-n { color: var(--lime); }
+
+.proj-main {}
+.proj-title {
+  font-family: var(--fd);
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.3rem;
+  transition: color .3s;
+}
+.proj-item:hover .proj-title { color: var(--lime); }
+.proj-desc { color: var(--ink3); font-size: 0.88rem; margin-bottom: 0.6rem; }
+.proj-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.proj-tag {
+  font-family: var(--fm);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  padding: 3px 9px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  color: var(--ink3);
+  transition: border-color .2s, color .2s;
+}
+.proj-item:hover .proj-tag { border-color: rgba(200,255,0,0.2); color: var(--ink2); }
+
+.proj-arr {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink3); font-size: 1.1rem;
+  transition: all .3s var(--ease);
+  flex-shrink: 0;
+}
+.proj-item:hover .proj-arr {
+  background: var(--lime);
+  border-color: var(--lime);
+  color: var(--bg);
+  transform: rotate(45deg);
+}
+
+/* ── FEATURED ── */
+.proj-feat {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 3rem;
+  text-decoration: none; color: inherit;
+  transition: border-color .3s;
+}
+.proj-feat:hover { border-color: var(--lime); }
+.pf-content { padding: 3rem; display: flex; flex-direction: column; gap: 1rem; }
+.pf-label {
+  font-family: var(--fm); font-size: 0.65rem;
+  color: var(--lime); letter-spacing: 0.15em;
+  text-transform: uppercase;
+  display: flex; align-items: center; gap: 8px;
+}
+.pf-label::before { content: '★'; }
+.pf-title {
+  font-family: var(--fd);
+  font-size: 2.2rem; font-weight: 800;
+  letter-spacing: -0.04em; line-height: 1.05;
+  transition: color .2s;
+}
+.proj-feat:hover .pf-title { color: var(--lime); }
+.pf-desc { color: var(--ink2); font-size: 0.95rem; line-height: 1.7; flex: 1; }
+.pf-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.pf-tag {
+  font-family: var(--fm); font-size: 0.68rem;
+  padding: 3px 10px; border-radius: 4px;
+  border: 1px solid var(--border2); color: var(--ink2);
+}
+.pf-visual {
+  background: var(--bg3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 6rem;
+  border-left: 1px solid var(--border);
+  transition: border-color .3s;
+}
+.proj-feat:hover .pf-visual { border-color: var(--lime); }
+.pf-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 1rem; border-top: 1px solid var(--border); margin-top: auto;
+}
+.pf-link { font-family: var(--fm); font-size: 0.7rem; color: var(--ink3); letter-spacing: 0.1em; text-transform: uppercase; }
+.pf-arr {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink3); font-size: 0.95rem;
+  transition: all .25s;
+}
+.proj-feat:hover .pf-arr { background: var(--lime); border-color: var(--lime); color: var(--bg); transform: rotate(45deg); }
+
+@media (max-width: 768px) {
+  .proj-feat { grid-template-columns: 1fr; }
+  .pf-visual { display: none; }
+  .proj-item { grid-template-columns: 56px 1fr 44px; gap: 1rem; }
+}
+
+/* ── GLOBAL TYPOGRAPHY FIX ── */
+.num-val    { font-size: 2.8rem !important; }
+.num-label  { font-size: 0.72rem !important; }
+.exp-co     { font-size: 1.25rem !important; letter-spacing: -0.01em !important; }
+.proj-title { font-size: 1.3rem  !important; letter-spacing: -0.01em !important; }
+.proj-n     { font-size: 1.8rem  !important; }
+.pf-title   { font-size: 1.5rem  !important; letter-spacing: -0.01em !important; }
+.photo-name { font-size: 1.15rem !important; }
+.avail-title{ font-size: 1.1rem  !important; }
+.nl-left h3 { font-size: 1.4rem  !important; letter-spacing: -0.01em !important; }
+.form-title { font-size: 1.35rem !important; letter-spacing: -0.01em !important; }
+.post-title { font-size: 1rem    !important; line-height: 1.4 !important; }
+.post-hero .post-title { font-size: 1.4rem !important; }
+.feat-badge, .featured-badge { font-size: 0.65rem !important; }
+.email-link { font-size: clamp(1.6rem, 4vw, 2.8rem) !important; letter-spacing: -0.02em !important; }
+.hn-title   { font-size: 1.1rem  !important; }
+.hsc-title  { font-size: 1.5rem  !important; }
+.pci-name   { font-size: 1.1rem  !important; }
+.pci-role   { font-size: 0.62rem !important; }
+.about-card-name { font-size: 1.1rem !important; }
+
+/* body text readable */
+.about-body p, .exp-desc, .proj-desc, .pf-desc, .post-excerpt,
+.blog-excerpt, .avail-desc, .contact-desc, .nl-left p,
+.num-desc, .fact-desc { 
+  font-size: 0.92rem !important; 
+  line-height: 1.8 !important;
+  color: var(--ink2);
+}
+
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="loader-txt">Projects</div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<nav>
+  <a href="index.html" class="nav-logo"><div class="nav-logo-dot"></div>ADHIT</a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Hire Me</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-ghost">WORK</div>
+  <div class="page-eyebrow">002 - Projects</div>
+  <h1 class="page-title">SELECTED<br>WORK</h1>
+</div>
+
+<section>
+  <div class="sec-tag rv">All Projects</div>
+  <h2 class="sec-h rv d1">THINGS I'VE<br>BUILT</h2>
+
+  <div class="filter-row rv d2">
+    <button class="fbtn on" onclick="filterP('all',this)">All</button>
+    <button class="fbtn" onclick="filterP('tools',this)">Tools</button>
+    <button class="fbtn" onclick="filterP('app',this)">Web App</button>
+    <button class="fbtn" onclick="filterP('ui',this)">UI / Design</button>
+    <button class="fbtn" onclick="filterP('game',this)">Game</button>
+  </div>
+
+  <!-- FEATURED -->
+  <a href="#" class="proj-feat rv" data-cat="tools">
+    <div class="pf-content">
+      <div class="pf-label">Featured Project</div>
+      <h3 class="pf-title">CineMatch</h3>
+      <p class="pf-desc">CineMatch is a single page web app that recommends movies and TV series based on your current mood and preferred genres. No sign up, no clutter just pick your vibe and get your watchlist for tonight.
+                        Built as a pure HTML/CSS/JS project with zero dependencies, fully responsive for both desktop and mobile.</p>
+      <div class="pf-tags">
+        <span class="pf-tag">HTML5</span>
+        <span class="pf-tag">CSS3</span>
+        <span class="pf-tag">Vanilla JavaScript</span>
+        <span class="pf-tag">TMDB API</span>
+        <span class="pf-tag">Bebas Neue + DM Sans</span>
+        <span class="pf-tag">GitHub Pages</span>
+      </div>
+      <div class="pf-footer">
+        <span class="pf-link">↗ Live Demo</span>
+        <div class="pf-arr">→</div>
+      </div>
+    </div>
+    <div class="pf-visual">🎬</div>
+  </a>
+
+  <!-- LIST -->
+  <div class="proj-list" id="projList">
+    <a href="#" class="proj-item rv" data-cat="app">
+      <div class="proj-n">02</div>
+      <div class="proj-main">
+        <h3 class="proj-title">IRON GARAGE</h3>
+        <p class="proj-desc">Interactive digital showroom of Fast & Furious iconic cars.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">HTML5</span><span class="proj-tag">CSS3</span><span class="proj-tag">Vanilla JavaScript</span>
+        </div>
+      </div>
+      <div class="proj-arr">→</div>
+    </a>
+    <a href="#" class="proj-item rv" data-cat="tools">
+      <div class="proj-n">03</div>
+      <div class="proj-main">
+        <h3 class="proj-title">KetikCepat</h3>
+        <p class="proj-desc">Tes kecepatan mengetik Bahasa Indonesia 3 mode kesulitan, statistik real time, sistem grading S/A/B/C/D.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">HTML5</span><span class="proj-tag">CSS3</span><span class="proj-tag">Vanilla JavaScript</span>
+        </div>
+      </div>
+      <div class="proj-arr">→</div>
+    </a>
+    <a href="#" class="proj-item rv" data-cat="game">
+      <div class="proj-n">04</div>
+      <div class="proj-main">
+        <h3 class="proj-title">MALANG.HIDDEN</h3>
+        <p class="proj-desc">Temukan tempat tersembunyi di Malang. Interactive map explorer powered by OpenStreetMap. Single file, no backend, no framework.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">HTML / CSS / JS</span><span class="proj-tag">Leaflet.js</span><span class="proj-tag">OpenStreetMap</span><span class="proj-tag">Overpass API</span>
+        </div>
+      </div>
+      <div class="proj-arr">→</div>
+    </a>
+    <a href="#" class="proj-item rv" data-cat="ui">
+      <div class="proj-n">05</div>
+      <div class="proj-main">
+        <h3 class="proj-title">Jadwal Waktu Sholat Harian</h3>
+        <p class="proj-desc">Jadwal waktu sholat harian untuk kota-kota di Indonesia. Dark/light mode, pola geometri Islam, countdown sholat berikutnya & kalender Hijriyah otomatis.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">HTML</span><span class="proj-tag">CSS</span><span class="proj-tag">Aladhan API</span>
+        </div>
+      </div>
+      <div class="proj-arr">→</div>
+    </a>
+    <a href="#" class="proj-item rv" data-cat="app">
+      <div class="proj-n">06</div>
+      <div class="proj-main">
+        <h3 class="proj-title">SonicVis - Music Visualizer</h3>
+        <p class="proj-desc">Real time music visualizer built with vanilla JS & Web Audio API. 4 visualization modes : Bars, Wave, Radial, and Particles.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">HTML5 Canvas API</span><span class="proj-tag">Web Audio API</span><span class="proj-tag">CSS3</span>
+        </div>
+      </div>
+      <div class="proj-arr">→</div>
+    </a>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="mq-item">Color Palette Studio</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Weather Dashboard</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Markdown Editor</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Pixel Art Canvas</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Component Library</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Color Palette Studio</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Weather Dashboard</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Markdown Editor</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Pixel Art Canvas</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Component Library</span><span class="mq-item mq-sep"> ✦ </span>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-copy">© 2026 <strong>Agus Satria Adhitama</strong> · All rights reserved</div>
+  <div class="footer-brand">ADHIT<span>.</span>DEV</div>
+  <div class="footer-copy">Designed &amp; Built by <strong>Agus Satria Adhitama</strong></div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+function filterP(cat, btn) {
+  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  const feat = document.querySelector('.proj-feat');
+  if (feat) feat.style.display = (cat === 'all' || feat.dataset.cat === cat) ? '' : 'none';
+  document.querySelectorAll('.proj-item').forEach(el => {
+    el.style.display = (cat === 'all' || el.dataset.cat === cat) ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>

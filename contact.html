@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Contact - Agus Satria Adhitama</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+/* ── CONTACT LAYOUT ── */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 480px;
+  gap: 5rem;
+  align-items: start;
+  margin-top: 3rem;
+}
+
+/* LEFT */
+.contact-desc {
+  color: var(--ink2); font-size: 1.05rem;
+  max-width: 420px; margin-bottom: 2.5rem; line-height: 1.85;
+}
+.email-link {
+  font-family: var(--fd);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1; color: var(--ink);
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+  margin-bottom: 3rem;
+  transition: color .3s;
+}
+.email-link::after {
+  content: '';
+  position: absolute; bottom: -4px; left: 0; right: 0;
+  height: 2px; background: var(--lime);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .4s var(--ease);
+}
+.email-link:hover { color: var(--lime); }
+.email-link:hover::after { transform: scaleX(1); }
+
+/* SOCIAL CARDS */
+.social-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem;
+  margin-top: 2rem;
+}
+.soc-card {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.1rem 1.25rem;
+  text-decoration: none; color: inherit;
+  transition: border-color .2s, background .2s, transform .2s;
+}
+.soc-card:hover {
+  border-color: var(--lime);
+  background: rgba(200,255,0,0.04);
+  transform: translateY(-3px);
+}
+.soc-icon {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  background: var(--bg3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; flex-shrink: 0;
+}
+.soc-name {
+  font-family: var(--fm); font-size: 0.75rem;
+  color: var(--ink2); letter-spacing: 0.04em;
+}
+.soc-handle {
+  font-family: var(--fm); font-size: 0.65rem;
+  color: var(--ink3); letter-spacing: 0.02em; margin-top: 1px;
+}
+
+/* ── CONTACT FORM ── */
+.contact-form {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2.5rem;
+  transition: border-color .3s;
+}
+.contact-form:hover { border-color: var(--border2); }
+.form-title {
+  font-family: var(--fd);
+  font-size: 1.8rem; font-weight: 800;
+  letter-spacing: -0.03em; margin-bottom: 0.4rem;
+}
+.form-sub { color: var(--ink3); font-size: 0.88rem; margin-bottom: 2rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.form-group { margin-bottom: 1rem; }
+.form-label {
+  display: block; font-family: var(--fm);
+  font-size: 0.68rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink3); margin-bottom: 0.45rem;
+}
+.form-input, .form-textarea {
+  width: 100%; font-family: var(--fm); font-size: 0.85rem;
+  background: var(--bg); border: 1px solid var(--border2);
+  color: var(--ink); padding: 0.8rem 1rem;
+  border-radius: 10px; outline: none;
+  transition: border-color .2s, box-shadow .2s;
+  resize: none;
+}
+.form-input:focus, .form-textarea:focus {
+  border-color: var(--lime);
+  box-shadow: 0 0 0 3px rgba(200,255,0,0.08);
+}
+.form-input::placeholder, .form-textarea::placeholder { color: var(--ink3); }
+.form-textarea { height: 120px; line-height: 1.6; }
+.form-submit {
+  width: 100%; font-family: var(--fm); font-size: 0.8rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--lime); color: var(--bg);
+  border: none; padding: 1rem; border-radius: 10px;
+  cursor: pointer; font-weight: 700; margin-top: 0.5rem;
+  transition: transform .2s, box-shadow .2s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.form-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(200,255,0,0.28);
+}
+.form-success {
+  display: none; text-align: center; padding: 2.5rem 1rem;
+}
+.form-success.show { display: block; }
+.fs-icon { font-size: 3rem; margin-bottom: 1rem; }
+.fs-title {
+  font-family: var(--fd);
+  font-size: 2rem; font-weight: 800;
+  letter-spacing: -0.03em; color: var(--lime); margin-bottom: 0.5rem;
+}
+.fs-sub { color: var(--ink3); }
+
+/* ── AVAILABILITY ── */
+#avail { background: var(--bg2); }
+.avail-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 16px; overflow: hidden; margin-top: 3rem;
+}
+.avail-card {
+  background: var(--bg2); padding: 2.5rem;
+  display: flex; flex-direction: column; gap: 0.75rem;
+  transition: background .2s;
+}
+.avail-card:hover { background: var(--bg3); }
+.avail-icon { font-size: 1.8rem; }
+.avail-title {
+  font-family: var(--fd);
+  font-size: 1.4rem; font-weight: 800; letter-spacing: -0.03em;
+}
+.avail-desc { color: var(--ink3); font-size: 0.88rem; line-height: 1.6; flex: 1; }
+.status-dot-wrap {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--fm); font-size: 0.68rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-top: 0.5rem;
+}
+.sdot {
+  width: 7px; height: 7px; border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+.s-open  .sdot { background: var(--lime); }
+.s-open  { color: var(--lime); }
+.s-lim   .sdot { background: var(--blue); }
+.s-lim   { color: var(--blue); }
+.s-off   .sdot { background: var(--red); }
+.s-off   { color: var(--red); }
+
+@media (max-width: 900px) {
+  .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .avail-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .social-grid { grid-template-columns: 1fr; }
+}
+
+/* ── GLOBAL TYPOGRAPHY FIX ── */
+.num-val    { font-size: 2.8rem !important; }
+.num-label  { font-size: 0.72rem !important; }
+.exp-co     { font-size: 1.25rem !important; letter-spacing: -0.01em !important; }
+.proj-title { font-size: 1.3rem  !important; letter-spacing: -0.01em !important; }
+.proj-n     { font-size: 1.8rem  !important; }
+.pf-title   { font-size: 1.5rem  !important; letter-spacing: -0.01em !important; }
+.photo-name { font-size: 1.15rem !important; }
+.avail-title{ font-size: 1.1rem  !important; }
+.nl-left h3 { font-size: 1.4rem  !important; letter-spacing: -0.01em !important; }
+.form-title { font-size: 1.35rem !important; letter-spacing: -0.01em !important; }
+.post-title { font-size: 1rem    !important; line-height: 1.4 !important; }
+.post-hero .post-title { font-size: 1.4rem !important; }
+.feat-badge, .featured-badge { font-size: 0.65rem !important; }
+.email-link { font-size: clamp(1.6rem, 4vw, 2.8rem) !important; letter-spacing: -0.02em !important; }
+.hn-title   { font-size: 1.1rem  !important; }
+.hsc-title  { font-size: 1.5rem  !important; }
+.pci-name   { font-size: 1.1rem  !important; }
+.pci-role   { font-size: 0.62rem !important; }
+.about-card-name { font-size: 1.1rem !important; }
+
+/* body text readable */
+.about-body p, .exp-desc, .proj-desc, .pf-desc, .post-excerpt,
+.blog-excerpt, .avail-desc, .contact-desc, .nl-left p,
+.num-desc, .fact-desc { 
+  font-size: 0.92rem !important; 
+  line-height: 1.8 !important;
+  color: var(--ink2);
+}
+
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="loader-txt">Contact</div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<nav>
+  <a href="index.html" class="nav-logo"><div class="nav-logo-dot"></div>ADHIT</a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="mailto:agusadhitama95.com" class="nav-cta">Email Me</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-ghost">HI!</div>
+  <div class="page-eyebrow">004 - Contact</div>
+  <h1 class="page-title">LET'S BUILD<br>SOMETHING<br>GREAT.</h1>
+</div>
+
+<section>
+  <div class="contact-layout">
+    <!-- LEFT -->
+    <div>
+      <div class="sec-tag rv">Reach Out</div>
+      <p class="contact-desc rv d1">Punya proyek menarik ? Mau diskusi teknikal, kolaborasi, atau sekadar say hi ? Pintu saya selalu terbuka.</p>
+      <a href="mailto:agus@example.com" class="email-link rv d2">agusadhitama95@gmail.com</a>
+
+      <div class="sec-tag rv">Find Me</div>
+      <div class="social-grid rv d1">
+        <a href="https://github.com/agusadhitama" target="_blank" class="soc-card">
+          <div class="soc-icon">⌥</div>
+          <div><div class="soc-name">GitHub</div><div class="soc-handle">@agusadhitama</div></div>
+        </a>
+        <a href="https://www.linkedin.com/in/agusadhitama/" target="_blank" class="soc-card">
+          <div class="soc-icon" style="font-size:.75rem;font-weight:700;font-family:var(--fm)">in</div>
+          <div><div class="soc-name">LinkedIn</div><div class="soc-handle">Agus Satria Adhitama</div></div>
+        </a>
+        <a href="https://www.youtube.com/@adhitdisitu" target="_blank" class="soc-card">
+          <div class="soc-icon">𝕏</div>
+          <div><div class="soc-name">Youtube</div><div class="soc-handle">Bob Adhit</div></div>
+        </a>
+        <a href="https://www.instagram.com/agusadhitamaa/" target="_blank" class="soc-card">
+          <div class="soc-icon">◈</div>
+          <div><div class="soc-name">Instagram</div><div class="soc-handle">@agusadhitamaa</div></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="contact-form rv">
+      <div id="formBody">
+        <h3 class="form-title">Kirim Pesan</h3>
+        <p class="form-sub">Biasanya saya balas dalam 1–2 hari kerja.</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nama</label>
+            <input type="text" class="form-input" placeholder="Nama kamu" id="fName"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-input" placeholder="email@kamu.com" id="fEmail"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Topik</label>
+          <input type="text" class="form-input" placeholder="Project, kolaborasi, diskusi..." id="fTopic"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Pesan</label>
+          <textarea class="form-textarea" placeholder="Ceritakan lebih detail..." id="fMsg"></textarea>
+        </div>
+        <button class="form-submit" onclick="sendForm()">Kirim Pesan →</button>
+      </div>
+      <div class="form-success" id="formOk">
+        <div class="fs-icon">✅</div>
+        <h3 class="fs-title">Terkirim!</h3>
+        <p class="fs-sub">Makasih sudah menghubungi saya.<br>Saya akan segera membalas!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AVAILABILITY -->
+<section id="avail">
+  <div class="sec-tag rv">Status</div>
+  <h2 class="sec-h rv d1">WHAT I'M<br>OPEN FOR</h2>
+  <div class="avail-grid rv">
+    <div class="avail-card">
+      <div class="avail-icon">💼</div>
+      <div class="avail-title">Freelance Project</div>
+      <p class="avail-desc">Website, web app, atau UI dari nol. Per project atau ongoing retainer.</p>
+      <div class="status-dot-wrap s-open"><div class="sdot"></div>Open</div>
+    </div>
+    <div class="avail-card">
+      <div class="avail-icon">🙌🏾</div>
+      <div class="avail-title">Kolaborasi</div>
+      <p class="avail-desc">Open source, side project bersama, atau brainstorming ide baru.</p>
+      <div class="status-dot-wrap s-open"><div class="sdot"></div>Open</div>
+    </div>
+    <div class="avail-card">
+      <div class="avail-icon">💬</div>
+      <div class="avail-title">Mentoring</div>
+      <p class="avail-desc">Code review, diskusi teknikal, atau mentoring developer junior.</p>
+      <div class="status-dot-wrap s-lim"><div class="sdot"></div>Limited</div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="mq-item">Let's Work Together</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Open to Freelance</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Based in Malang ID</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Remote Friendly</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Agus Satria Adhitama</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Let's Work Together</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Open to Freelance</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Based in Malang ID</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Remote Friendly</span><span class="mq-item mq-sep"> ✦ </span>
+    <span class="mq-item">Agus Satria Adhitama</span><span class="mq-item mq-sep"> ✦ </span>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-copy">© 2026 <strong>Agus Satria Adhitama</strong> · All rights reserved</div>
+  <div class="footer-brand">ADHIT<span>.</span>DEV</div>
+  <div class="footer-copy">Designed &amp; Built by <strong>Agus Satria Adhitama</strong></div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+function sendForm() {
+  const n = document.getElementById('fName').value.trim();
+  const e = document.getElementById('fEmail').value.trim();
+  const m = document.getElementById('fMsg').value.trim();
+  if (!n || !e || !m) { alert('Mohon isi nama, email, dan pesan.'); return; }
+  if (!e.includes('@')) { alert('Email tidak valid.'); return; }
+  document.getElementById('formBody').style.display = 'none';
+  document.getElementById('formOk').classList.add('show');
+}
+</script>
+</body>
+</html>
